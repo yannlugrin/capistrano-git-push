@@ -14,7 +14,7 @@ class Capistrano::Git < Capistrano::SCM
 
     def check
       run_locally do
-        test 'git short-ref'
+        test 'git show-ref'
       end
     end
 
@@ -23,11 +23,10 @@ class Capistrano::Git < Capistrano::SCM
     end
 
     def update
-      on roles(:all) do |host|
-        run_locally do
-          puts fetch(:branch)
-          execute :git, :push, '--force', "#{host.user}@#{host.hostname}:#{repo_path} #{fetch(:branch)}:master"
-        end
+      host = context.host
+
+      run_locally do
+        execute :git, :push, '--force', "#{host.user}@#{host.hostname}:#{repo_path} #{fetch(:branch)}:master"
       end
     end
 
