@@ -4,3 +4,7 @@ source 'https://rubygems.org'
 gemspec path: '../../'
 
 gem 'capistrano', '~> 3.2.0'
+
+# sanity dependencies
+gem 'coveralls', group: :test, require: false
+gem 'simplecov', '~> 0.7.1'
