@@ -22,8 +22,11 @@ and then add to `Capfile`:
 
 and then add to `deploy.rb`:
 
+    set :scm, :git
     set :git_strategy, Capistrano::Git::PushStrategy
 
+Attention `repo_url` as no effect, but `branch` can be used to set local
+branch to push on server.
 
 ## Contributing
 
