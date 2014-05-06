@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'mocha'
 
-  spec.add_dependency 'capistrano', '~> 3.2'
+  spec.add_dependency 'capistrano', '~> 3.1'
 end
