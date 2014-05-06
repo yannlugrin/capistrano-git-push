@@ -13,23 +13,30 @@ class Capistrano::Git < Capistrano::SCM
     end
 
     def check
-      test! :git, :'ls-remote -h', repo_url
+      run_locally do
+        test 'git short-ref'
+      end
     end
 
     def clone
-      git :clone, '--mirror', repo_url, repo_path
+      git :init, '--bare', repo_path
     end
 
     def update
-      git :remote, :update
+      on roles(:all) do |host|
+        run_locally do
+          puts fetch(:branch)
+          execute :git, :push, '--force', "#{host.user}@#{host.hostname}:#{repo_path} #{fetch(:branch)}:master"
+        end
+      end
     end
 
     def release
-      git :archive, fetch(:branch), '| tar -x -f - -C', release_path
+      git :archive, 'master', '| tar -x -f - -C', release_path
     end
 
     def fetch_revision
-      context.capture(:git, "rev-parse --short #{fetch(:branch)}")
+      context.capture(:git, 'rev-parse --short master')
     end
   end
 end
