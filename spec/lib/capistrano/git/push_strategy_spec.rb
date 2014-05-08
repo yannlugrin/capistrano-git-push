@@ -21,7 +21,9 @@ module Capistrano
 
     describe '#check' do
       it 'should test the repo url' do
-        run_locally.expects(:test).with('git show-ref')
+        run_locally.expects(:fetch).returns(:branch)
+
+        run_locally.expects(:test).with('git show-ref --heads branch')
 
         subject.check
       end

@@ -14,7 +14,7 @@ class Capistrano::Git < Capistrano::SCM
 
     def check
       run_locally do
-        test 'git show-ref'
+        test "git show-ref --heads #{fetch(:branch)}"
       end
     end
 
