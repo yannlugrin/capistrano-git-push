@@ -4,7 +4,7 @@
 # New code also under MIT licence
 # (Copyright (c) 2014 Yann Lugrin
 
-require 'capistrano/git'
+require 'capistrano/scm'
 
 class Capistrano::Git < Capistrano::SCM
   module PushStrategy

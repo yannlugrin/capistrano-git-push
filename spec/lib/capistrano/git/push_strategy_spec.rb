@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+require 'capistrano/git'
 require 'capistrano/git/push_strategy'
 
 module Capistrano
