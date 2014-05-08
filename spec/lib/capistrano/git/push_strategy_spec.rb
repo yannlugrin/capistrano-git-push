@@ -44,7 +44,20 @@ module Capistrano
         context.expects(:host).returns(host)
 
         run_locally.expects(:repo_path).returns('/path/to/repo')
-        run_locally.expects(:fetch).returns(:branch)
+        run_locally.expects(:fetch).with(:git_force, false).returns(false)
+        run_locally.expects(:fetch).with(:branch).returns(:branch)
+
+        run_locally.expects(:execute).with(:git, :push, nil, 'user@hostname:/path/to/repo branch:master')
+
+        subject.update
+      end
+
+      it 'should use --force options when git_force is set to true' do
+        context.expects(:host).returns(host)
+
+        run_locally.expects(:repo_path).returns('/path/to/repo')
+        run_locally.expects(:fetch).with(:git_force, false).returns(true)
+        run_locally.expects(:fetch).with(:branch).returns(:branch)
 
         run_locally.expects(:execute).with(:git, :push, '--force', 'user@hostname:/path/to/repo branch:master')
 

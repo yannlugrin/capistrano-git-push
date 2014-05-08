@@ -26,7 +26,7 @@ class Capistrano::Git < Capistrano::SCM
       host = context.host
 
       run_locally do
-        execute :git, :push, '--force', "#{host.user}@#{host.hostname}:#{repo_path} #{fetch(:branch)}:master"
+        execute :git, :push, (fetch(:git_force, false) ? '--force' : nil), "#{host.user}@#{host.hostname}:#{repo_path} #{fetch(:branch)}:master"
       end
     end
 

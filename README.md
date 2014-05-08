@@ -28,6 +28,9 @@ and then add to `deploy.rb`:
 Attention `repo_url` as no effect, but `branch` can be used to set local
 branch to push on server.
 
+`git_force` can be set to `true` if you want to push use
+`--force`option.
+
 ## Contributing
 
 1. Fork it
